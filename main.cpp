@@ -9,7 +9,6 @@ struct Node
 	Node* next; //указатель на следующий узел
 	Node(std::string _val) :value(_val), next(nullptr) {} //конструктор
 	std::mutex* node_mutex = new std::mutex;
-
 };
 
 class FineGrainedQueue
@@ -59,9 +58,7 @@ void FineGrainedQueue::push_back(std::string _val) //ДОБАВЛЕНИЕ ЭЛЕ
 void FineGrainedQueue::insertIntoMiddle( std::string value, int pos) //ФУНКЦИЯ ВСТАВКИ НОВОГО УЗЛА
 {
 	Node* newNode = new Node(value); // создаем новый узел 
-
 	std::unique_lock<std::mutex> lock(FineGrainedQueue* queue_mutex);
-
 	if (first == nullptr)
 	{
 		first = newNode; // если список пуст, новый узел и будет началом списка
@@ -74,9 +71,7 @@ void FineGrainedQueue::insertIntoMiddle( std::string value, int pos) //ФУНК�
 		return;
 	}
 	std::unique_lock<std::mutex> unlock(FineGrainedQueue* queue_mutex);
-
 	int currPos = 0;
-	
 	Node* current = first;
 	std::lock_guard<std::mutex> lock(Node * node_mutex);
 	// в цикле идем по списку, пока список не кончится, или пока не дойдем до позиции
@@ -113,7 +108,6 @@ int countNumber() //Вспомогателльная функция-счетчи
 	out.close();
 	return count;
 }
-
 
 int main()
 {
